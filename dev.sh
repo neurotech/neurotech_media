@@ -14,11 +14,11 @@ mkdir -p /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
 mkdir -p /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
 
 cp *.lua /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
-cp -r fonts /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/fonts
+cp -r fonts /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media
 cp neurotech_media-Retail.toc /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
 
 cp *.lua /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
-cp -r fonts /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/fonts
+cp -r fonts /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media
 cp neurotech_media-Classic.toc /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
 cp neurotech_media-Classic.toc /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/neurotech_media-BCC.toc
 cp neurotech_media-Classic.toc /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/neurotech_media-WOTLKC.toc

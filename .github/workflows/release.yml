@@ -24,7 +24,8 @@ jobs:
       - run: cat neurotech_media.toctemplate > neurotech_media-Classic.toc
       - run: sed -i "s/INTERFACE_VERSION/$(cat ./versions/retail)/g" neurotech_media-Retail.toc
       - run: sed -i "s/INTERFACE_VERSION/$(cat ./versions/classic)/g" neurotech_media-Classic.toc
-      - run: cp *.lua *.mp3 *.tga *.ttf ./neurotech_media/
+      - run: cp *.lua ./neurotech_media/
+      - run: cp -r fonts ./neurotech_media/
       - run: cp neurotech_media-Retail.toc ./neurotech_media/neurotech_media-Retail.toc
 
       - name: Build Retail zip
