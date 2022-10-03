@@ -1,0 +1,51 @@
+name: "Tagged Release"
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  tagged-release:
+    runs-on: ubuntu-latest
+
+    env:
+      RELEASE_VERSION: ${GITHUB_REF#refs/*/}
+
+    steps:
+      - name: Checkout code and generate TOC files
+        uses: actions/checkout@v2
+
+      - run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - run: mkdir -p neurotech_media
+      - run: touch neurotech_media-Retail.toc neurotech_media-Classic.toc
+      - run: sed -i "s/ADDON_VERSION/${{ env.RELEASE_VERSION }}/g" neurotech_media.toctemplate
+      - run: cat neurotech_media.toctemplate > neurotech_media-Retail.toc
+      - run: cat neurotech_media.toctemplate > neurotech_media-Classic.toc
+      - run: sed -i "s/INTERFACE_VERSION/$(cat ./versions/retail)/g" neurotech_media-Retail.toc
+      - run: sed -i "s/INTERFACE_VERSION/$(cat ./versions/classic)/g" neurotech_media-Classic.toc
+      - run: cp *.lua *.mp3 *.tga *.ttf ./neurotech_media/
+      - run: cp neurotech_media-Retail.toc ./neurotech_media/neurotech_media-Retail.toc
+
+      - name: Build Retail zip
+        uses: edgarrc/action-7z@v1.0.4
+        with:
+          args: 7z a neurotech_media-${{ env.RELEASE_VERSION }}.zip ./neurotech_media/
+
+      - run: cp neurotech_media-Classic.toc ./neurotech_media/neurotech_media-Classic.toc
+      - run: cp neurotech_media-Classic.toc ./neurotech_media/neurotech_media-BCC.toc
+      - run: cp neurotech_media-Classic.toc ./neurotech_media/neurotech_media-WOTLKC.toc
+
+      - name: Build Classic zip
+        uses: edgarrc/action-7z@v1.0.4
+        with:
+          args: 7z a neurotech_media-${{ env.RELEASE_VERSION }}-classic.zip ./neurotech_media/
+
+      - name: Publish Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            neurotech_media-${{ env.RELEASE_VERSION }}.zip
+            neurotech_media-${{ env.RELEASE_VERSION }}-classic.zip
