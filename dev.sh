@@ -1,3 +1,4 @@
+echo "Building neurotech_media and installing to WoW directory."
 touch neurotech_media-Retail.toc neurotech_media-Classic.toc
 
 cat neurotech_media.toctemplate > neurotech_media.toctemplate.tmp
@@ -14,11 +15,11 @@ mkdir -p /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
 mkdir -p /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
 
 cp *.lua /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
-cp -r fonts /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media
+cp -r media /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media
 cp neurotech_media-Retail.toc /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
 
 cp *.lua /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
-cp -r fonts /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media
+cp -r media /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media
 cp neurotech_media-Classic.toc /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
 cp neurotech_media-Classic.toc /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/neurotech_media-BCC.toc
 cp neurotech_media-Classic.toc /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/neurotech_media-WOTLKC.toc
