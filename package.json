@@ -1,6 +1,6 @@
 {
   "name": "neurotech_media",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Custom media",
   "main": "neurotech_media.lua",
   "repository": {
