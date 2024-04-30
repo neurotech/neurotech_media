@@ -1,29 +1,23 @@
 echo "Building neurotech_media and installing to WoW directory."
-touch neurotech_media-Retail.toc neurotech_media-Classic.toc
 
-cat neurotech_media.toctemplate > neurotech_media.toctemplate.tmp
+echo "Creating TOC file."
+touch neurotech_media.toc.tmp
+cat neurotech_media.toc >neurotech_media.toc.tmp
+sed -i "s/@project-version@/$(git describe --abbrev=0)/g" neurotech_media.toc.tmp
 
-sed -i "s/ADDON_VERSION/$(git describe --abbrev=0)/g" neurotech_media.toctemplate.tmp
+echo "Copying assets to WoW Classic installation directory."
+mkdir -p /f/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
+cp neurotech_media.toc.tmp /f/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/neurotech_media.toc
+cp *.lua /f/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
+cp -r media/ /f/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
 
-cat neurotech_media.toctemplate.tmp > neurotech_media-Retail.toc
-cat neurotech_media.toctemplate.tmp > neurotech_media-Classic.toc
+echo "Copying assets to WoW Retail installation directory."
+mkdir -p /f/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
+cp neurotech_media.toc.tmp /f/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/neurotech_media.toc
+cp *.lua /f/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
+cp -r media/ /f/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
 
-sed -i "s/INTERFACE_VERSION/$(cat ./versions/retail)/g" neurotech_media-Retail.toc
-sed -i "s/INTERFACE_VERSION/$(cat ./versions/classic)/g" neurotech_media-Classic.toc
+echo "Cleaning up."
+rm neurotech_media.toc.tmp
 
-mkdir -p /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
-mkdir -p /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
-
-cp *.lua /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
-cp -r media /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media
-cp neurotech_media-Retail.toc /h/games/World\ of\ Warcraft/_retail_/Interface/AddOns/neurotech_media/
-
-cp *.lua /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
-cp -r media /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media
-cp neurotech_media-Classic.toc /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/
-cp neurotech_media-Classic.toc /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/neurotech_media-BCC.toc
-cp neurotech_media-Classic.toc /h/games/World\ of\ Warcraft/_classic_/Interface/AddOns/neurotech_media/neurotech_media-WOTLKC.toc
-
-rm neurotech_media.toctemplate.tmp
-rm neurotech_media-Retail.toc
-rm neurotech_media-Classic.toc
+echo "Complete."

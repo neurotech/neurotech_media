@@ -1,0 +1,12 @@
+## Interface: 100206
+## Interface-Classic: 11502
+## Interface-BCC: 20504
+## Interface-Wrath: 30403
+## Interface-Cata: 40400
+## X-Curse-Project-ID: 1011225
+## Title : neurotech_media
+## Notes: Custom media
+## Author: Tim Douglas (neurotech#0659)
+## Version: @project-version@
+
+neurotech_media.lua
