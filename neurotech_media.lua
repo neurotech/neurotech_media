@@ -1,8 +1,8 @@
 local LSM = LibStub("LibSharedMedia-3.0")
 
 if not LSM then
-  return
+    return
 else
-  LSM:Register("statusbar", "!neurotech01", [[Interface\Addons\neurotech_media\media\textures\neurotech01.tga]])
-  LSM:Register("font", "Cabin-Bold", [[Interface\Addons\neurotech_media\media\fonts\Cabin-Bold.ttf]])
+    LSM:Register("statusbar", "!neurotech01", [[Interface\Addons\neurotech_media\media\textures\neurotech01.tga]])
+    LSM:Register("font", "Cabin-Bold", [[Interface\Addons\neurotech_media\media\fonts\Cabin-Bold.ttf]])
 end

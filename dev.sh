@@ -1,27 +1,39 @@
-export CLASSIC_PATH="/mnt/c/Program Files (x86)/World of Warcraft/_classic_/Interface/AddOns/neurotech_media"
-export RETAIL_PATH="/mnt/c/Program Files (x86)/World of Warcraft/_retail_/Interface/AddOns/neurotech_media"
+#!/bin/bash
 
-directories=(
-    "$CLASSIC_PATH"
-    "$RETAIL_PATH"
+WOW_DIR="$HOME/games/World of Warcraft"
+ADDON_NAME="neurotech_media"
+
+TARGETS=(
+    "_retail_:Retail"
+    # "_classic_:Classic"
+    # "_classic_ptr_:Classic PTR"
+    # "_xptr_:Retail PTR (xptr)"
+    # "_ptr_:Retail PTR"
 )
 
-echo "Building neurotech_media and installing to WoW directories."
+install_addon() {
+    local client="$1"
+    local label="$2"
+    local dest="$WOW_DIR/$client/Interface/AddOns/$ADDON_NAME"
 
-for dir in "${directories[@]}"; do
-  touch neurotech_media.toc.tmp
+    echo "Copying assets to $label..."
+    mkdir -p "$dest"
+    cp *.lua "$dest/"
+    cp $ADDON_NAME.toc.tmp "$dest/$ADDON_NAME.toc"
+}
 
-  cat neurotech_media.toc > neurotech_media.toc.tmp
+echo "Building $ADDON_NAME and installing to WoW directory."
 
-  sed -i "s/@project-version@/$(git describe --abbrev=0)/g" neurotech_media.toc.tmp
+echo "Creating TOC file..."
+sed "s/@project-version@/$(git describe --abbrev=0)/g" $ADDON_NAME.toc > $ADDON_NAME.toc.tmp
 
-  mkdir -p "$dir"
-
-  cp -r *.lua *.ogg "$dir"
-
-  cp neurotech_media.toc.tmp "$dir"/neurotech_media.toc
-
-  rm neurotech_media.toc.tmp
+for target in "${TARGETS[@]}"; do
+    client="${target%%:*}"
+    label="${target##*:}"
+    install_addon "$client" "$label"
 done
+
+echo "Cleaning up..."
+rm neurotech_media.toc.tmp
 
 echo "Complete."
